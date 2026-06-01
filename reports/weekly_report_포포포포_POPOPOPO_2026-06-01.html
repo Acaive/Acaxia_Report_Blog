@@ -208,6 +208,12 @@
       overflow-y: auto;
     }
     .clip-list li { margin-left: 1.2em; }
+    .clip-list a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0, 230, 118, 0.35);
+    }
+    .clip-list a:hover { border-bottom-color: var(--accent); }
     .summary-table {
       width: 100%;
       border-collapse: collapse;
@@ -299,7 +305,7 @@
     }
   </style>
 </head>
-<body>
+<body><nav class="blog-nav" style="position:fixed;z-index:9999;top:12px;left:12px;padding:8px 14px;background:rgba(15,20,25,0.92);border-radius:8px;border:1px solid rgba(255,255,255,0.15);"><a href="../index.html" style="color:#00e676;text-decoration:none;font-weight:700;font-size:0.9rem;">← 리포트 목록</a></nav>
   <p class="hint">← → 키 또는 버튼으로 슬라이드 이동</p>
   <div class="deck" id="deck">
     <section class="slide slide-cover active" data-slide="0">
@@ -307,6 +313,7 @@
       <h1>포포포포 POPOPOPO</h1>
       <p class="sub">주간 방송 하이라이트 자동 분석 리포트</p>
       <p class="period">2026.05.25 – 2026.05.31</p>
+      <p class="sub unofficial" style="margin-top:16px">비공식 · 자동 분석 리포트이며 치지직·스트리머와 무관합니다.</p>
       <p class="sub" style="margin-top:12px">작성: 2026-06-01 22:48</p>
     </section>
 
@@ -327,7 +334,7 @@
         </div>
         <div class="info-card">
           <div class="label">기간 기준</div>
-          <div class="value">시작: day7_fallback_nearest / 종료: day1_fallback_nearest</div>
+          <div class="value">7일 전 구간 내 가장 가까운 방송<br>1일 전 구간 내 가장 가까운 방송 종료</div>
         </div>
       </div>
       <div class="formula">통합 점수 = 채팅 메시지 수 + (클립 조회수 ÷ 100). 채팅 밀집 10초 창과 클립 전체 구간(시작~끝)을 후보로 합친 뒤, 전체 VOD에서 상위 8개만 선정합니다.</div>
@@ -347,7 +354,7 @@
             <div class="score-chip">클립 점수<strong>0.6</strong></div>
             <div class="score-chip">합산<strong>468.6</strong></div>
           </div>
-          <ul class="clip-list"><li>고맙다냥 (조회 58)</li></ul>
+          <ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/ViN4JTpw4C" target="_blank" rel="noopener">고맙다냥</a> (조회 58)</li></ul>
           <a class="btn-link" href="https://chzzk.naver.com/video/13458818?currentTime=24138" target="_blank" rel="noopener">치지직에서 보기</a>
         </div>
       </div>
@@ -366,7 +373,7 @@
             <div class="score-chip">클립 점수<strong>45.9</strong></div>
             <div class="score-chip">합산<strong>368.9</strong></div>
           </div>
-          <p class="meta-line" style="margin-top:8px">클립 4개 · 조회수 합산 4.6K</p><ul class="clip-list"><li>딜1ㄷ (조회 2.2K)</li><li>포포 뼈 삭는다 (조회 1.1K)</li><li>포포의 비밀... (조회 402)</li><li>헉.... (조회 882)</li></ul>
+          <p class="meta-line" style="margin-top:8px">클립 4개 · 조회수 합산 4.6K</p><ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/64idkM3LlO" target="_blank" rel="noopener">딜1ㄷ</a> (조회 2.2K)</li><li><a href="https://chzzk.naver.com/clips/bxHHVXCRD4" target="_blank" rel="noopener">포포 뼈 삭는다</a> (조회 1.1K)</li><li><a href="https://chzzk.naver.com/clips/g5JldOo07J" target="_blank" rel="noopener">포포의 비밀...</a> (조회 402)</li><li><a href="https://chzzk.naver.com/clips/CR4UPty7rb" target="_blank" rel="noopener">헉....</a> (조회 882)</li></ul>
           <a class="btn-link" href="https://chzzk.naver.com/video/13425368?currentTime=2180" target="_blank" rel="noopener">치지직에서 보기</a>
         </div>
       </div>
@@ -385,7 +392,7 @@
             <div class="score-chip">클립 점수<strong>1.4</strong></div>
             <div class="score-chip">합산<strong>332.4</strong></div>
           </div>
-          <ul class="clip-list"><li>ㅇㅋ 클립 딴다 (조회 144)</li></ul>
+          <ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/yzV4Vd1EOZ" target="_blank" rel="noopener">ㅇㅋ 클립 딴다</a> (조회 144)</li></ul>
           <a class="btn-link" href="https://chzzk.naver.com/video/13425368?currentTime=10300" target="_blank" rel="noopener">치지직에서 보기</a>
         </div>
       </div>
@@ -404,7 +411,7 @@
             <div class="score-chip">클립 점수<strong>0.1</strong></div>
             <div class="score-chip">합산<strong>329.1</strong></div>
           </div>
-          <ul class="clip-list"><li>? (조회 15)</li></ul>
+          <ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/Sye2i53RqI" target="_blank" rel="noopener">?</a> (조회 15)</li></ul>
           <a class="btn-link" href="https://chzzk.naver.com/video/13458818?currentTime=2532" target="_blank" rel="noopener">치지직에서 보기</a>
         </div>
       </div>
@@ -423,7 +430,7 @@
             <div class="score-chip">클립 점수<strong>3.0</strong></div>
             <div class="score-chip">합산<strong>293.0</strong></div>
           </div>
-          <ul class="clip-list"><li>라인업 ㅋㅋㅋㅋㅋ (조회 299)</li></ul>
+          <ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/1JQnEl8CdM" target="_blank" rel="noopener">라인업 ㅋㅋㅋㅋㅋ</a> (조회 299)</li></ul>
           <a class="btn-link" href="https://chzzk.naver.com/video/13425368?currentTime=6326" target="_blank" rel="noopener">치지직에서 보기</a>
         </div>
       </div>
@@ -442,7 +449,7 @@
             <div class="score-chip">클립 점수<strong>3.6</strong></div>
             <div class="score-chip">합산<strong>204.6</strong></div>
           </div>
-          <ul class="clip-list"><li>실리콘유입(아니 (조회 358)</li></ul>
+          <ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/wSqGw0DNeV" target="_blank" rel="noopener">실리콘유입(아니</a> (조회 358)</li></ul>
           <a class="btn-link" href="https://chzzk.naver.com/video/13425368?currentTime=5182" target="_blank" rel="noopener">치지직에서 보기</a>
         </div>
       </div>
@@ -461,7 +468,7 @@
             <div class="score-chip">클립 점수<strong>0.8</strong></div>
             <div class="score-chip">합산<strong>172.8</strong></div>
           </div>
-          <ul class="clip-list"><li>개쳐귀엽네 (조회 80)</li></ul>
+          <ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/yvEowEIAPC" target="_blank" rel="noopener">개쳐귀엽네</a> (조회 80)</li></ul>
           <a class="btn-link" href="https://chzzk.naver.com/video/13458818?currentTime=25445" target="_blank" rel="noopener">치지직에서 보기</a>
         </div>
       </div>
