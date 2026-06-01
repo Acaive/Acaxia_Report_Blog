@@ -3,96 +3,186 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Acaxia 주간 하이라이트 리포트</title>
+  <title>Acaxia 주간 하이라이트</title>
   <style>
     :root {
-      --bg: #0f1419;
+      --bg: #0a0e14;
+      --bg2: #121a24;
       --card: #1a2332;
       --text: #f5f7fa;
       --muted: #9aa8b8;
       --accent: #00e676;
+      --accent-dim: rgba(0, 230, 118, 0.12);
+      --border: rgba(255, 255, 255, 0.1);
+      --shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
     }
+    * { box-sizing: border-box; }
     body {
-      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
-      background: var(--bg);
+      font-family: "Pretendard", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      background: radial-gradient(ellipse 120% 80% at 50% -20%, rgba(0, 230, 118, 0.08), transparent),
+        var(--bg);
       color: var(--text);
       margin: 0;
-      padding: 32px 20px 48px;
+      min-height: 100vh;
+      padding: 40px 16px 56px;
     }
-    .wrap { max-width: 960px; margin: 0 auto; }
-    h1 { font-size: 1.75rem; margin-bottom: 8px; }
-    .sub { color: var(--muted); margin-bottom: 28px; line-height: 1.5; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
+    .wrap {
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .site-header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-bottom: 8px;
+    }
+    .site-header h1 {
+      font-size: 1.65rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0;
+      background: linear-gradient(135deg, var(--text) 0%, var(--accent) 120%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .site-header .brand-line {
+      width: 48px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 999px;
+      margin: 14px auto 0;
+    }
+    .member-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
     .card {
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 12px;
-      padding: 18px 20px;
+      background: linear-gradient(160deg, var(--card) 0%, var(--bg2) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
-    .card h2 { font-size: 1rem; margin: 0 0 8px; line-height: 1.35; }
-    .meta { color: var(--muted); font-size: 0.85rem; margin: 4px 0; }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0, 230, 118, 0.35);
+    }
+    .avatar-wrap {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      background: var(--bg2);
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .avatar-placeholder {
+      background: linear-gradient(180deg, var(--accent-dim), var(--bg2));
+    }
+    .card-body {
+      padding: 20px 22px 24px;
+    }
+    .card h2 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin: 0 0 10px;
+      line-height: 1.3;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin: 0 0 4px;
+      line-height: 1.45;
+    }
     .btn {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 10px 16px;
+      display: block;
+      width: 100%;
+      margin-top: 16px;
+      padding: 14px 16px;
       background: var(--accent);
-      color: #0f1419;
+      color: #0a0e14;
       text-decoration: none;
-      font-weight: 700;
-      border-radius: 8px;
-      font-size: 0.9rem;
+      font-weight: 800;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      text-align: center;
+      transition: filter 0.15s ease;
     }
-    .empty { color: var(--muted); }
+    .btn:hover { filter: brightness(1.08); }
+    .empty {
+      color: var(--muted);
+      text-align: center;
+      padding: 32px 16px;
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>Acaxia 주간 하이라이트 리포트</h1>
-    <p class="sub">자동 스케줄러가 생성한 주간 하이라이트 HTML만 게시됩니다. (수동 분석 리포트는 포함되지 않습니다.)</p>
-    <p class="sub"><a href="https://acaive.github.io/Acaxia_Report_Blog/" style="color:var(--accent);">https://acaive.github.io/Acaxia_Report_Blog/</a></p>
-    <div class="grid">
+    <header class="site-header">
+      <h1>Acaxia 주간 하이라이트</h1>
+      <div class="brand-line" aria-hidden="true"></div>
+    </header>
+    <div class="member-list">
       
         <article class="card">
-          <h2>블레어 로즈</h2>
-          <p class="meta">블레어 로즈 · 2026-06-01</p>
-          <p class="meta">갱신 2026-06-01 22:50</p>
-          <a class="btn" href="reports/weekly_report_블레어_로즈_2026-06-01.html">리포트 열기</a>
+          <div class="avatar-wrap"><img src="assets/profiles/ryu_siho.webp" alt="류시호 RyuSiho" loading="lazy" decoding="async"></div>
+          <div class="card-body">
+            <h2>류시호 RyuSiho</h2>
+            <p class="meta">주간 리포트 · 2026-06-01</p>
+            <p class="meta">갱신 2026-06-02 00:13</p>
+            <a class="btn" href="reports/weekly_report_류시호_RyuSiho_2026-06-01.html">리포트 열기</a>
+          </div>
         </article>
         
 
         <article class="card">
-          <h2>하시요 HaSiyo</h2>
-          <p class="meta">하시요 HaSiyo · 2026-06-01</p>
-          <p class="meta">갱신 2026-06-01 22:49</p>
-          <a class="btn" href="reports/weekly_report_하시요_HaSiyo_2026-06-01.html">리포트 열기</a>
+          <div class="avatar-wrap"><img src="assets/profiles/popopopo.webp" alt="포포포포 POPOPOPO" loading="lazy" decoding="async"></div>
+          <div class="card-body">
+            <h2>포포포포 POPOPOPO</h2>
+            <p class="meta">주간 리포트 · 2026-06-01</p>
+            <p class="meta">갱신 2026-06-02 00:13</p>
+            <a class="btn" href="reports/weekly_report_포포포포_POPOPOPO_2026-06-01.html">리포트 열기</a>
+          </div>
         </article>
         
 
         <article class="card">
-          <h2>비올레타 모네</h2>
-          <p class="meta">비올레타 모네 · 2026-06-01</p>
-          <p class="meta">갱신 2026-06-01 22:49</p>
-          <a class="btn" href="reports/weekly_report_비올레타_모네_2026-06-01.html">리포트 열기</a>
+          <div class="avatar-wrap"><img src="assets/profiles/violet_monet.webp" alt="비올레타 모네" loading="lazy" decoding="async"></div>
+          <div class="card-body">
+            <h2>비올레타 모네</h2>
+            <p class="meta">주간 리포트 · 2026-06-01</p>
+            <p class="meta">갱신 2026-06-02 00:13</p>
+            <a class="btn" href="reports/weekly_report_비올레타_모네_2026-06-01.html">리포트 열기</a>
+          </div>
         </article>
         
 
         <article class="card">
-          <h2>포포포포 POPOPOPO</h2>
-          <p class="meta">포포포포 POPOPOPO · 2026-06-01</p>
-          <p class="meta">갱신 2026-06-01 22:49</p>
-          <a class="btn" href="reports/weekly_report_포포포포_POPOPOPO_2026-06-01.html">리포트 열기</a>
+          <div class="avatar-wrap"><img src="assets/profiles/hasiyo.webp" alt="하시요 HaSiyo" loading="lazy" decoding="async"></div>
+          <div class="card-body">
+            <h2>하시요 HaSiyo</h2>
+            <p class="meta">주간 리포트 · 2026-06-01</p>
+            <p class="meta">갱신 2026-06-02 00:13</p>
+            <a class="btn" href="reports/weekly_report_하시요_HaSiyo_2026-06-01.html">리포트 열기</a>
+          </div>
         </article>
         
 
         <article class="card">
-          <h2>류시호 RyuSiho</h2>
-          <p class="meta">류시호 RyuSiho · 2026-06-01</p>
-          <p class="meta">갱신 2026-06-01 22:48</p>
-          <a class="btn" href="reports/weekly_report_류시호_RyuSiho_2026-06-01.html">리포트 열기</a>
+          <div class="avatar-wrap"><img src="assets/profiles/blair_rose.webp" alt="블레어 로즈" loading="lazy" decoding="async"></div>
+          <div class="card-body">
+            <h2>블레어 로즈</h2>
+            <p class="meta">주간 리포트 · 2026-06-01</p>
+            <p class="meta">갱신 2026-06-02 00:13</p>
+            <a class="btn" href="reports/weekly_report_블레어_로즈_2026-06-01.html">리포트 열기</a>
+          </div>
         </article>
         
     </div>
