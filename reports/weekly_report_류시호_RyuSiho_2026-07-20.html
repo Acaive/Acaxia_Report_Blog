@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>류시호 RyuSiho 주간 하이라이트 2026.07.14 – 2026.07.20</title>
+  <style>
+    :root {
+      --bg0: #0f1419;
+      --bg1: #1a2332;
+      --accent: #00e676;
+      --accent2: #69f0ae;
+      --text: #f5f7fa;
+      --muted: #9aa8b8;
+      --card: rgba(255, 255, 255, 0.06);
+      --border: rgba(255, 255, 255, 0.12);
+      --slide-w: min(96vw, 1280px);
+      --slide-h: min(54vw, 720px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      font-family: "Pretendard", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      background: var(--bg0);
+      color: var(--text);
+      overflow: hidden;
+    }
+    .deck {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .slide {
+      display: none;
+      width: var(--slide-w);
+      height: var(--slide-h);
+      max-height: 90vh;
+      background: linear-gradient(145deg, var(--bg1) 0%, #0d1117 55%, #121a24 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+      padding: 48px 56px;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide.active { display: flex; animation: fadeIn 0.35s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide::before {
+      content: "";
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(0, 230, 118, 0.15), transparent 70%);
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bg0);
+      background: var(--accent);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .slide-cover h1 {
+      font-size: clamp(1.8rem, 4vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .slide-cover .sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .slide-cover .period {
+      margin-top: 32px;
+      font-size: 1.05rem;
+      color: var(--accent2);
+    }
+    .slide-info h2, .slide-highlight h2, .slide-summary h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--accent2);
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 24px;
+      flex: 1;
+    }
+    .info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .info-card .label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .info-card .value {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .formula {
+      margin-top: 8px;
+      padding: 16px 20px;
+      background: rgba(0, 230, 118, 0.08);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: var(--text);
+    }
+    .slide-highlight {
+      padding-top: 40px;
+    }
+    .rank-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 28px;
+      flex: 1;
+    }
+    .rank-num {
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 900;
+      line-height: 1;
+      color: var(--accent);
+      opacity: 0.95;
+      min-width: 80px;
+    }
+    .rank-body { flex: 1; min-width: 0; }
+    .vod-title {
+      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+    .meta-line {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .time-range {
+      font-size: 1.25rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      margin: 12px 0;
+      color: var(--text);
+    }
+    .score-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin: 16px 0;
+    }
+    .score-chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+    }
+    .score-chip strong {
+      display: block;
+      font-size: 1.15rem;
+      color: var(--accent2);
+      margin-top: 4px;
+    }
+    .btn-link {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 12px 22px;
+      background: var(--accent);
+      color: var(--bg0);
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 230, 118, 0.35);
+    }
+    .clip-list {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+    .clip-list li { margin-left: 1.2em; }
+    .clip-list a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0, 230, 118, 0.35);
+    }
+    .clip-list a:hover { border-bottom-color: var(--accent); }
+    .unofficial {
+      font-size: 0.8rem;
+      color: var(--muted);
+      opacity: 0.92;
+      max-width: 36em;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      flex: 1;
+      overflow: hidden;
+    }
+    .summary-table th,
+    .summary-table td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .summary-table th {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .summary-table tr:hover td { background: var(--card); }
+    .summary-table a { color: var(--accent2); text-decoration: none; }
+    .summary-table a:hover { text-decoration: underline; }
+    .nav {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(15, 20, 25, 0.92);
+      border: 1px solid var(--border);
+      padding: 12px 24px;
+      border-radius: 999px;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    .nav button {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+    .nav button:hover { background: var(--accent); color: var(--bg0); border-color: var(--accent); }
+    .nav .counter {
+      font-size: 0.85rem;
+      color: var(--muted);
+      min-width: 64px;
+      text-align: center;
+    }
+    .dots {
+      display: flex;
+      gap: 6px;
+      max-width: 200px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+    }
+    .dots span.active { background: var(--accent); }
+    .hint {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      z-index: 50;
+    }
+    @media print {
+      .nav, .hint { display: none; }
+      .slide {
+        display: flex !important;
+        page-break-after: always;
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body><nav class="blog-nav" style="position:fixed;z-index:9999;top:12px;left:12px;padding:8px 14px;background:rgba(15,20,25,0.92);border-radius:8px;border:1px solid rgba(255,255,255,0.15);"><a href="../index.html" style="color:#00e676;text-decoration:none;font-weight:700;font-size:0.9rem;">← 리포트 목록</a></nav>
+  <p class="hint">← → 키 또는 버튼으로 슬라이드 이동</p>
+  <div class="deck" id="deck">
+    <section class="slide slide-cover active" data-slide="0">
+      <span class="badge">치지직 주간 하이라이트</span>
+      <h1>류시호 RyuSiho</h1>
+      <p class="sub">주간 방송 하이라이트 자동 분석 리포트</p>
+      <p class="period">2026.07.14 – 2026.07.20</p>
+      <p class="sub unofficial" style="margin-top:16px">비공식 · 자동 분석 리포트이며 치지직·스트리머와 무관합니다.</p>
+      <p class="sub" style="margin-top:12px">작성: 2026-07-20 18:09</p>
+      <p class="sub unofficial" style="margin-top:16px">비공식 · 자동 분석 리포트이며 치지직·스트리머와 무관합니다.</p>
+    </section>
+
+    <section class="slide slide-info" data-slide="1">
+      <h2>분석 개요</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="label">조사 기간</div>
+          <div class="value">2026-07-14 06:04:07<br>~ 2026-07-20 02:52:44</div>
+        </div>
+        <div class="info-card">
+          <div class="label">분석 대상</div>
+          <div class="value">다시보기 7개<br>기간 내 클립 81개</div>
+        </div>
+        <div class="info-card">
+          <div class="label">주간 선정</div>
+          <div class="value">전체 VOD 통합 TOP 8<br>후보 1356개 중 선별</div>
+        </div>
+        <div class="info-card">
+          <div class="label">기간 기준</div>
+          <div class="value">2026-07-14 06:04 ~ 2026-07-20 02:52<br>시작: 7일 전(조회 기준일) 첫 방송 시작<br>종료: 1일 전 마지막 방송 종료</div>
+        </div>
+      </div>
+      <div class="formula">통합 점수 = 채팅 메시지 수 + (클립 조회수 ÷ 100). 채팅 밀집 10초 창과 클립 전체 구간을 후보로 모은 뒤, 가까운 시간대는 VOD별로 하나로 묶고, 전체 VOD에서 상위 8개만 선정합니다.</div>
+    </section>
+
+    
+    <section class="slide slide-highlight" data-slide="2">
+      <span class="badge">주간 TOP 1</span>
+      <div class="rank-row">
+        <div class="rank-num">#1</div>
+        <div class="rank-body">
+          <div class="vod-title">이 아저씨가 일요일의 노근함을 풀어줄게</div>
+          <div class="meta-line">VOD 14279592 · 클립 구간</div>
+          <div class="time-range">00:57:00 – 01:42:00</div>
+          <div class="meta-line">통합 129개 후보 · 시청 링크 01:24:52</div>
+          <div class="score-bar">
+            <div class="score-chip">채팅<strong>468</strong></div>
+            <div class="score-chip">클립 점수<strong>5.0</strong></div>
+            <div class="score-chip">합산<strong>473.0</strong></div>
+          </div>
+          <p class="meta-line" style="margin-top:8px">클립 2개 · 조회수 합산 504</p><ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/XJgE4kqdmB" target="_blank" rel="noopener">총구정열</a> (조회 28)</li><li><a href="https://chzzk.naver.com/clips/WRxOf9dT5E" target="_blank" rel="noopener">시호형...?</a> (조회 476)</li></ul>
+          <a class="btn-link" href="https://chzzk.naver.com/video/14279592?currentTime=5092" target="_blank" rel="noopener">치지직에서 보기</a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="slide slide-highlight" data-slide="3">
+      <span class="badge">주간 TOP 2</span>
+      <div class="rank-row">
+        <div class="rank-num">#2</div>
+        <div class="rank-body">
+          <div class="vod-title">온몸비틀기</div>
+          <div class="meta-line">VOD 14198696 · 클립 구간</div>
+          <div class="time-range">02:43:20 – 03:08:40</div>
+          <div class="meta-line">통합 45개 후보 · 시청 링크 02:45:37</div>
+          <div class="score-bar">
+            <div class="score-chip">채팅<strong>345</strong></div>
+            <div class="score-chip">클립 점수<strong>12.6</strong></div>
+            <div class="score-chip">합산<strong>357.6</strong></div>
+          </div>
+          <p class="meta-line" style="margin-top:8px">클립 4개 · 조회수 합산 1.3K</p><ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/OoIZo6pv09" target="_blank" rel="noopener">시호의 찜목록</a> (조회 357)</li><li><a href="https://chzzk.naver.com/clips/2Z1fXLg4Dz" target="_blank" rel="noopener">ㅋㅋ</a> (조회 272)</li><li><a href="https://chzzk.naver.com/clips/2XW1p3kTnW" target="_blank" rel="noopener">ㅋㅋ</a> (조회 57)</li><li><a href="https://chzzk.naver.com/clips/jbGm8habIJ" target="_blank" rel="noopener">아 그런 취향?</a> (조회 575)</li></ul>
+          <a class="btn-link" href="https://chzzk.naver.com/video/14198696?currentTime=9937" target="_blank" rel="noopener">치지직에서 보기</a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="slide slide-highlight" data-slide="4">
+      <span class="badge">주간 TOP 3</span>
+      <div class="rank-row">
+        <div class="rank-num">#3</div>
+        <div class="rank-body">
+          <div class="vod-title">그 유명한 게임 나도 해보자</div>
+          <div class="meta-line">VOD 14231030 · 클립 구간</div>
+          <div class="time-range">01:51:30 – 01:56:10</div>
+          <div class="meta-line">통합 4개 후보 · 시청 링크 01:52:56</div>
+          <div class="score-bar">
+            <div class="score-chip">채팅<strong>283</strong></div>
+            <div class="score-chip">클립 점수<strong>1.5</strong></div>
+            <div class="score-chip">합산<strong>284.5</strong></div>
+          </div>
+          <ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/e13DNnqoSl" target="_blank" rel="noopener">유시호 동무 ㄷㄷㄷㄷ</a> (조회 153)</li></ul>
+          <a class="btn-link" href="https://chzzk.naver.com/video/14231030?currentTime=6776" target="_blank" rel="noopener">치지직에서 보기</a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="slide slide-highlight" data-slide="5">
+      <span class="badge">주간 TOP 4</span>
+      <div class="rank-row">
+        <div class="rank-num">#4</div>
+        <div class="rank-body">
+          <div class="vod-title">더는 사리지 않을것입니다이스레기돼지자식파인애플피자민초</div>
+          <div class="meta-line">VOD 14214211 · 클립 구간</div>
+          <div class="time-range">00:00:11 – 00:35:20</div>
+          <div class="meta-line">통합 24개 후보 · 시청 링크 00:11:00</div>
+          <div class="score-bar">
+            <div class="score-chip">채팅<strong>239</strong></div>
+            <div class="score-chip">클립 점수<strong>23.9</strong></div>
+            <div class="score-chip">합산<strong>262.9</strong></div>
+          </div>
+          <p class="meta-line" style="margin-top:8px">클립 13개 · 조회수 합산 2.4K</p><ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/JTVKxhSDid" target="_blank" rel="noopener">아줌마</a> (조회 30)</li><li><a href="https://chzzk.naver.com/clips/F9FHDYXpLE" target="_blank" rel="noopener">쌀숭이 템플릿</a> (조회 246)</li><li><a href="https://chzzk.naver.com/clips/0VZVGYyyHF" target="_blank" rel="noopener">일진의 3색 슬리퍼</a> (조회 22)</li><li><a href="https://chzzk.naver.com/clips/FgcL14uCuA" target="_blank" rel="noopener">텐트</a> (조회 28)</li><li><a href="https://chzzk.naver.com/clips/2988qiy9DI" target="_blank" rel="noopener">좋은 거</a> (조회 315)</li><li><a href="https://chzzk.naver.com/clips/cihH05Z1MF" target="_blank" rel="noopener">캠핑장</a> (조회 42)</li><li><a href="https://chzzk.naver.com/clips/IDSW1zFRGD" target="_blank" rel="noopener">촉수</a> (조회 62)</li><li><a href="https://chzzk.naver.com/clips/Ty3vcJ2G07" target="_blank" rel="noopener">겸손한 자세</a> (조회 31)</li><li><a href="https://chzzk.naver.com/clips/IskKBXHT3P" target="_blank" rel="noopener">류시호 완판</a> (조회 216)</li><li><a href="https://chzzk.naver.com/clips/hcZosqVJXM" target="_blank" rel="noopener">.</a> (조회 39)</li><li><a href="https://chzzk.naver.com/clips/9IVgQRjiw5" target="_blank" rel="noopener">신자들의 소원</a> (조회 257)</li><li><a href="https://chzzk.naver.com/clips/cl84NlQvwD" target="_blank" rel="noopener">&quot;구멍&quot;</a> (조회 237)</li><li><a href="https://chzzk.naver.com/clips/tz0lZSCpOo" target="_blank" rel="noopener">성1녀야...</a> (조회 862)</li></ul>
+          <a class="btn-link" href="https://chzzk.naver.com/video/14214211?currentTime=660" target="_blank" rel="noopener">치지직에서 보기</a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="slide slide-highlight" data-slide="6">
+      <span class="badge">주간 TOP 5</span>
+      <div class="rank-row">
+        <div class="rank-num">#5</div>
+        <div class="rank-body">
+          <div class="vod-title">극강의 뇌지컬파 띠호</div>
+          <div class="meta-line">VOD 14264257 · 클립 구간</div>
+          <div class="time-range">01:07:10 – 01:27:10</div>
+          <div class="meta-line">통합 22개 후보 · 시청 링크 01:16:00</div>
+          <div class="score-bar">
+            <div class="score-chip">채팅<strong>238</strong></div>
+            <div class="score-chip">클립 점수<strong>2.4</strong></div>
+            <div class="score-chip">합산<strong>240.4</strong></div>
+          </div>
+          <p class="meta-line" style="margin-top:8px">클립 2개 · 조회수 합산 238</p><ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/wzbYZG3gUK" target="_blank" rel="noopener">여긴 왜 방장이</a> (조회 190)</li><li><a href="https://chzzk.naver.com/clips/KqayELxi0H" target="_blank" rel="noopener">좀 참아라</a> (조회 48)</li></ul>
+          <a class="btn-link" href="https://chzzk.naver.com/video/14264257?currentTime=4560" target="_blank" rel="noopener">치지직에서 보기</a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="slide slide-highlight" data-slide="7">
+      <span class="badge">주간 TOP 6</span>
+      <div class="rank-row">
+        <div class="rank-num">#6</div>
+        <div class="rank-body">
+          <div class="vod-title">그 유명한 게임 나도 해보자</div>
+          <div class="meta-line">VOD 14231030 · 클립 구간</div>
+          <div class="time-range">01:05:30 – 01:12:20</div>
+          <div class="meta-line">통합 7개 후보 · 시청 링크 01:09:22</div>
+          <div class="score-bar">
+            <div class="score-chip">채팅<strong>163</strong></div>
+            <div class="score-chip">클립 점수<strong>73.7</strong></div>
+            <div class="score-chip">합산<strong>236.7</strong></div>
+          </div>
+          <p class="meta-line" style="margin-top:8px">클립 2개 · 조회수 합산 7.4K</p><ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/Ibo69IhLEk" target="_blank" rel="noopener">한탕</a> (조회 22)</li><li><a href="https://chzzk.naver.com/clips/4eafot5sTh" target="_blank" rel="noopener">아니아니...</a> (조회 7.3K)</li></ul>
+          <a class="btn-link" href="https://chzzk.naver.com/video/14231030?currentTime=4162" target="_blank" rel="noopener">치지직에서 보기</a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="slide slide-highlight" data-slide="8">
+      <span class="badge">주간 TOP 7</span>
+      <div class="rank-row">
+        <div class="rank-num">#7</div>
+        <div class="rank-body">
+          <div class="vod-title">그 유명한 게임 나도 해보자</div>
+          <div class="meta-line">VOD 14231030 · 클립 구간</div>
+          <div class="time-range">00:12:50 – 00:31:50</div>
+          <div class="meta-line">통합 20개 후보 · 시청 링크 00:18:02</div>
+          <div class="score-bar">
+            <div class="score-chip">채팅<strong>236</strong></div>
+            <div class="score-chip">클립 점수<strong>0.6</strong></div>
+            <div class="score-chip">합산<strong>236.6</strong></div>
+          </div>
+          <p class="meta-line" style="margin-top:8px">클립 3개 · 조회수 합산 58</p><ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/yO9lhiStWC" target="_blank" rel="noopener">^^</a> (조회 13)</li><li><a href="https://chzzk.naver.com/clips/XFirH5qL0F" target="_blank" rel="noopener">요요현상</a> (조회 28)</li><li><a href="https://chzzk.naver.com/clips/Qmd1dgD72n" target="_blank" rel="noopener">그거 맞아요???</a> (조회 17)</li></ul>
+          <a class="btn-link" href="https://chzzk.naver.com/video/14231030?currentTime=1082" target="_blank" rel="noopener">치지직에서 보기</a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="slide slide-highlight" data-slide="9">
+      <span class="badge">주간 TOP 8</span>
+      <div class="rank-row">
+        <div class="rank-num">#8</div>
+        <div class="rank-body">
+          <div class="vod-title">극강의 뇌지컬파 띠호</div>
+          <div class="meta-line">VOD 14264257 · 클립 구간</div>
+          <div class="time-range">01:46:17 – 01:48:20</div>
+          
+          <div class="score-bar">
+            <div class="score-chip">채팅<strong>231</strong></div>
+            <div class="score-chip">클립 점수<strong>0.2</strong></div>
+            <div class="score-chip">합산<strong>231.2</strong></div>
+          </div>
+          <ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/y63oofdM78" target="_blank" rel="noopener">ㅁㅈ</a> (조회 21)</li></ul>
+          <a class="btn-link" href="https://chzzk.naver.com/video/14264257?currentTime=6438" target="_blank" rel="noopener">치지직에서 보기</a>
+        </div>
+      </div>
+    </section>
+    
+
+    <section class="slide slide-summary" data-slide="10">
+      <h2>분석 대상 VOD 요약</h2>
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>제목</th>
+            <th>VOD</th>
+            <th>클립</th>
+            <th>후보</th>
+            <th>링크</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>[켠왕] 안녕하세요 아카시아의 시크릿멤버 류시호입니다</td><td>14183892</td><td>0</td><td>200</td><td><a href="https://chzzk.naver.com/video/14183892" target="_blank" rel="noopener">열기</a></td></tr>
+<tr><td>온몸비틀기</td><td>14198696</td><td>4</td><td>187</td><td><a href="https://chzzk.naver.com/video/14198696" target="_blank" rel="noopener">열기</a></td></tr>
+<tr><td>더는 사리지 않을것입니다이스레기돼지자식파인애플피자민초</td><td>14214211</td><td>21</td><td>183</td><td><a href="https://chzzk.naver.com/video/14214211" target="_blank" rel="noopener">열기</a></td></tr>
+<tr><td>그 유명한 게임 나도 해보자</td><td>14231030</td><td>15</td><td>189</td><td><a href="https://chzzk.naver.com/video/14231030" target="_blank" rel="noopener">열기</a></td></tr>
+<tr><td>아저씨가 게임하는중 엔딩까지 가즈아</td><td>14249089</td><td>20</td><td>202</td><td><a href="https://chzzk.naver.com/video/14249089" target="_blank" rel="noopener">열기</a></td></tr>
+<tr><td>극강의 뇌지컬파 띠호</td><td>14264257</td><td>13</td><td>200</td><td><a href="https://chzzk.naver.com/video/14264257" target="_blank" rel="noopener">열기</a></td></tr>
+<tr><td>이 아저씨가 일요일의 노근함을 풀어줄게</td><td>14279592</td><td>8</td><td>195</td><td><a href="https://chzzk.naver.com/video/14279592" target="_blank" rel="noopener">열기</a></td></tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <nav class="nav" aria-label="슬라이드 탐색">
+    <button type="button" id="prev" title="이전">‹</button>
+    <span class="counter" id="counter">1 / 1</span>
+    <div class="dots" id="dots"></div>
+    <button type="button" id="next" title="다음">›</button>
+  </nav>
+
+  <script>
+    (function () {
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const total = slides.length;
+      let idx = 0;
+      const counter = document.getElementById("counter");
+      const dotsEl = document.getElementById("dots");
+
+      slides.forEach((_, i) => {
+        const d = document.createElement("span");
+        d.title = "슬라이드 " + (i + 1);
+        d.addEventListener("click", () => go(i));
+        dotsEl.appendChild(d);
+      });
+
+      function render() {
+        slides.forEach((s, i) => s.classList.toggle("active", i === idx));
+        counter.textContent = (idx + 1) + " / " + total;
+        dotsEl.querySelectorAll("span").forEach((d, i) => d.classList.toggle("active", i === idx));
+      }
+
+      function go(n) {
+        idx = Math.max(0, Math.min(total - 1, n));
+        render();
+      }
+
+      document.getElementById("prev").addEventListener("click", () => go(idx - 1));
+      document.getElementById("next").addEventListener("click", () => go(idx + 1));
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); go(idx + 1); }
+        if (e.key === "ArrowLeft") { e.preventDefault(); go(idx - 1); }
+        if (e.key === "Home") { go(0); }
+        if (e.key === "End") { go(total - 1); }
+      });
+      render();
+    })();
+  </script>
+</body>
+</html>
