@@ -304,6 +304,67 @@
       }
     }
   </style>
+<style id="report-responsive">
+/* Shared by newly generated reports and reports already in the archive. */
+@media screen {
+  .deck { width: 100%; height: 100vh; height: 100dvh; }
+  .slide { overflow-y: auto; max-height: calc(100vh - 150px); max-height: calc(100dvh - 150px); }
+  .slide > * { flex-shrink: 0; }
+  .slide::before { top: 0; right: 0; width: 200px; height: 200px; }
+  .slide h1, .slide h2, .vod-title, .meta-line, .info-card, .clip-list { overflow-wrap: anywhere; }
+  .info-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .info-card { min-width: 0; }
+  .badge { align-self: flex-start; }
+  .nav { max-width: calc(100% - 24px); }
+  .nav button { flex: 0 0 44px; width: 44px; height: 44px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent2); outline-offset: 3px; }
+  .blog-nav a { display: inline-flex; align-items: center; min-height: 28px; }
+}
+@media screen and (max-width: 960px), screen and (max-height: 700px) {
+  html, body { height: auto; min-height: 100%; overflow: visible; }
+  body { padding: calc(72px + env(safe-area-inset-top, 0px)) 12px calc(104px + env(safe-area-inset-bottom, 0px)); }
+  .deck { display: block; width: 100%; height: auto; }
+  .slide {
+    width: 100%; height: auto; max-height: none;
+    min-height: calc(100vh - 176px); min-height: calc(100dvh - 176px);
+    padding: 28px; margin: 0 auto; overflow: visible;
+  }
+  .slide::before { display: none; }
+  .slide.active { animation: none; }
+  .slide-cover h1 { font-size: clamp(1.6rem, 5vw, 2.4rem); }
+  .slide-cover .sub { font-size: 1rem; }
+  .rank-row { gap: 16px; }
+  .rank-num { min-width: 52px; font-size: 3rem; }
+  .clip-list { max-height: none; overflow: visible; }
+  .summary-table { display: block; max-width: 100%; overflow-x: auto; flex: none; }
+  .summary-table th, .summary-table td { min-width: 76px; overflow-wrap: anywhere; }
+  .summary-table th:first-child, .summary-table td:first-child { min-width: 200px; }
+  .nav { bottom: calc(12px + env(safe-area-inset-bottom, 0px)); padding: 8px 16px; gap: 12px; }
+  .hint { display: none; }
+  .blog-nav { top: calc(12px + env(safe-area-inset-top, 0px)) !important; max-width: calc(100% - 24px); }
+}
+@media screen and (max-width: 640px) {
+  .slide { padding: 24px 18px; border-radius: 12px; }
+  .slide-info h2, .slide-highlight h2, .slide-summary h2 { margin-bottom: 18px; }
+  .info-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .info-card { padding: 14px; }
+  .formula { padding: 14px; font-size: 0.9rem; }
+  .rank-row { flex-direction: column; }
+  .rank-body { width: 100%; }
+  .time-range { font-size: 1.05rem; overflow-wrap: anywhere; }
+  .score-bar { gap: 8px; }
+  .score-chip { flex: 1 1 100px; padding: 10px; min-width: 0; }
+  .reason-grid { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .reason-title span { display: block; margin: 4px 0 0; }
+  .btn-link { display: block; width: 100%; min-height: 44px; text-align: center; padding: 12px; overflow-wrap: anywhere; }
+  .nav .dots { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .slide.active { animation: none; }
+  .btn-link { transition: none; }
+}
+
+</style>
 </head>
 <body><nav class="blog-nav" style="position:fixed;z-index:9999;top:12px;left:12px;padding:8px 14px;background:rgba(15,20,25,0.92);border-radius:8px;border:1px solid rgba(255,255,255,0.15);"><a href="../index.html" style="color:#00e676;text-decoration:none;font-weight:700;font-size:0.9rem;">← 리포트 목록</a></nav>
   <p class="hint">← → 키 또는 버튼으로 슬라이드 이동</p>
@@ -563,5 +624,20 @@
       render();
     })();
   </script>
+<script id="report-responsive-navigation">
+(function () {
+  const deck = document.querySelector('.deck');
+  if (!deck) return;
+  let current = deck.querySelector('.slide.active');
+  new MutationObserver(function () {
+    const active = deck.querySelector('.slide.active');
+    if (active === current) return;
+    current = active;
+    if (active) active.scrollTop = 0;
+    window.scrollTo(0, 0);
+  }).observe(deck, { subtree: true, attributes: true, attributeFilter: ['class'] });
+})();
+
+</script>
 </body>
 </html>
