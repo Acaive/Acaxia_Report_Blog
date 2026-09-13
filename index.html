@@ -109,12 +109,14 @@
       background: linear-gradient(180deg, var(--accent-dim), var(--bg2));
     }
     .card-body {
+      min-width: 0;
       padding: 14px 14px 17px;
       display: flex;
       flex-direction: column;
       flex: 1;
     }
     .streamer-name {
+      overflow-wrap: anywhere;
       font-size: clamp(0.98rem, 1.32vw, 1.2rem);
       font-weight: 800;
       margin: 0 0 7px;
@@ -150,12 +152,23 @@
     }
     @media (max-width: 960px) {
       .member-list {
-        grid-template-columns: repeat(5, minmax(148px, 1fr));
-        overflow-x: auto;
-        padding-bottom: 8px;
-        scroll-snap-type: x proximity;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
-      .card { scroll-snap-align: start; }
+    }
+    @media (max-width: 640px) {
+      body { padding: 24px 12px 32px; }
+      .wrap { padding: 0; }
+      .site-header h1 { font-size: 1.55rem; overflow-wrap: anywhere; }
+      .member-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .card-body { padding: 12px; }
+      .btn { min-height: 44px; }
+    }
+    @media (max-width: 380px) {
+      .member-list { grid-template-columns: minmax(0, 1fr); }
+    }
+    a:focus-visible { outline: 3px solid var(--text); outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) {
+      .card, .btn { transition: none; }
     }
   </style>
 </head>
@@ -175,8 +188,8 @@
           <div class="avatar-wrap"><img src="assets/profiles/ryu_siho.webp" alt="류시호 RyuSiho" loading="lazy" decoding="async"></div>
           <div class="card-body">
             <h2 class="streamer-name" style="color:#f5f7fa">류시호 RyuSiho</h2>
-            <p class="meta">주간 · 2026-08-24</p>
-            <a class="btn" href="reports/weekly_report_류시호_RyuSiho_2026-08-24.html">리포트 열기</a>
+            <p class="meta">주간 · 2026-09-12</p>
+            <a class="btn" href="reports/weekly_report_류시호_RyuSiho_2026-09-12.html">리포트 열기</a>
           </div>
         </article>
         
@@ -185,8 +198,8 @@
           <div class="avatar-wrap"><img src="assets/profiles/popopopo.webp" alt="포포포포 POPOPOPO" loading="lazy" decoding="async"></div>
           <div class="card-body">
             <h2 class="streamer-name" style="color:#f5f7fa">포포포포 POPOPOPO</h2>
-            <p class="meta">주간 · 2026-08-24</p>
-            <a class="btn" href="reports/weekly_report_포포포포_POPOPOPO_2026-08-24.html">리포트 열기</a>
+            <p class="meta">주간 · 2026-09-11</p>
+            <a class="btn" href="reports/weekly_report_포포포포_POPOPOPO_2026-09-11.html">리포트 열기</a>
           </div>
         </article>
         
@@ -195,8 +208,8 @@
           <div class="avatar-wrap"><img src="assets/profiles/violet_monet.webp" alt="비올레타 모네" loading="lazy" decoding="async"></div>
           <div class="card-body">
             <h2 class="streamer-name" style="color:#f5f7fa">비올레타 모네</h2>
-            <p class="meta">주간 · 2026-08-24</p>
-            <a class="btn" href="reports/weekly_report_비올레타_모네_2026-08-24.html">리포트 열기</a>
+            <p class="meta">주간 · 2026-09-11</p>
+            <a class="btn" href="reports/weekly_report_비올레타_모네_2026-09-11.html">리포트 열기</a>
           </div>
         </article>
         
@@ -205,8 +218,8 @@
           <div class="avatar-wrap"><img src="assets/profiles/hasiyo.webp" alt="하시요 HaSiyo" loading="lazy" decoding="async"></div>
           <div class="card-body">
             <h2 class="streamer-name" style="color:#b8cce8">하시요 HaSiyo</h2>
-            <p class="meta">주간 · 2026-08-27</p>
-            <a class="btn" href="reports/weekly_report_하시요_HaSiyo_2026-08-27.html">리포트 열기</a>
+            <p class="meta">주간 · 2026-09-11</p>
+            <a class="btn" href="reports/weekly_report_하시요_HaSiyo_2026-09-11.html">리포트 열기</a>
           </div>
         </article>
         
@@ -215,8 +228,8 @@
           <div class="avatar-wrap"><img src="assets/profiles/blair_rose.webp" alt="블레어 로즈" loading="lazy" decoding="async"></div>
           <div class="card-body">
             <h2 class="streamer-name" style="color:#f5f7fa">블레어 로즈</h2>
-            <p class="meta">주간 · 2026-08-27</p>
-            <a class="btn" href="reports/weekly_report_블레어_로즈_2026-08-27.html">리포트 열기</a>
+            <p class="meta">주간 · 2026-09-12</p>
+            <a class="btn" href="reports/weekly_report_블레어_로즈_2026-09-12.html">리포트 열기</a>
           </div>
         </article>
         
