@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>블레어 로즈 주간 하이라이트 2026.09.18 – 2026.09.25</title>
+  <style>
+    :root {
+      --bg0: #0f1419;
+      --bg1: #1a2332;
+      --accent: #00e676;
+      --accent2: #69f0ae;
+      --text: #f5f7fa;
+      --muted: #9aa8b8;
+      --card: rgba(255, 255, 255, 0.06);
+      --border: rgba(255, 255, 255, 0.12);
+      --slide-w: min(96vw, 1280px);
+      --slide-h: min(54vw, 720px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      font-family: "Pretendard", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      background: var(--bg0);
+      color: var(--text);
+      overflow: hidden;
+    }
+    .deck {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .slide {
+      display: none;
+      width: var(--slide-w);
+      height: var(--slide-h);
+      max-height: 90vh;
+      background: linear-gradient(145deg, var(--bg1) 0%, #0d1117 55%, #121a24 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+      padding: 48px 56px;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide.active { display: flex; animation: fadeIn 0.35s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide::before {
+      content: "";
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(0, 230, 118, 0.15), transparent 70%);
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bg0);
+      background: var(--accent);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .slide-cover h1 {
+      font-size: clamp(1.8rem, 4vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .slide-cover .sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .slide-cover .period {
+      margin-top: 32px;
+      font-size: 1.05rem;
+      color: var(--accent2);
+    }
+    .slide-info h2, .slide-highlight h2, .slide-summary h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--accent2);
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 24px;
+      flex: 1;
+    }
+    .info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .info-card .label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .info-card .value {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .formula {
+      margin-top: 8px;
+      padding: 16px 20px;
+      background: rgba(0, 230, 118, 0.08);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: var(--text);
+    }
+    .slide-highlight {
+      padding-top: 40px;
+    }
+    .rank-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 28px;
+      flex: 1;
+    }
+    .rank-num {
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 900;
+      line-height: 1;
+      color: var(--accent);
+      opacity: 0.95;
+      min-width: 80px;
+    }
+    .rank-body { flex: 1; min-width: 0; }
+    .vod-title {
+      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+    .meta-line {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .time-range {
+      font-size: 1.25rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      margin: 4px 0 12px;
+      color: var(--text);
+    }
+    .time-caption {
+      margin-top: 12px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .score-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin: 16px 0;
+    }
+    .score-chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+    }
+    .score-chip strong {
+      display: block;
+      font-size: 1.15rem;
+      color: var(--accent2);
+      margin-top: 4px;
+    }
+    .reason-box {
+      margin: 4px 0 8px;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .reason-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 7px;
+    }
+    .reason-title span {
+      margin-left: 6px;
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    .reason-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 5px 14px;
+    }
+    .reason-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-width: 0;
+      font-size: 0.74rem;
+      color: var(--muted);
+    }
+    .reason-item strong {
+      flex: 0 0 auto;
+      color: var(--accent2);
+      font-variant-numeric: tabular-nums;
+    }
+    .btn-link {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 12px 22px;
+      background: var(--accent);
+      color: var(--bg0);
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 230, 118, 0.35);
+    }
+    .clip-list {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+    .clip-list li { margin-left: 1.2em; }
+    .clip-list a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0, 230, 118, 0.35);
+    }
+    .clip-list a:hover { border-bottom-color: var(--accent); }
+    .unofficial {
+      font-size: 0.8rem;
+      color: var(--muted);
+      opacity: 0.92;
+      max-width: 36em;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      flex: 1;
+      overflow: hidden;
+    }
+    .summary-table th,
+    .summary-table td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .summary-table th {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .summary-table tr:hover td { background: var(--card); }
+    .summary-table a { color: var(--accent2); text-decoration: none; }
+    .summary-table a:hover { text-decoration: underline; }
+    .nav {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(15, 20, 25, 0.92);
+      border: 1px solid var(--border);
+      padding: 12px 24px;
+      border-radius: 999px;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    .nav button {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+    .nav button:hover { background: var(--accent); color: var(--bg0); border-color: var(--accent); }
+    .nav .counter {
+      font-size: 0.85rem;
+      color: var(--muted);
+      min-width: 64px;
+      text-align: center;
+    }
+    .dots {
+      display: flex;
+      gap: 6px;
+      max-width: 200px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+    }
+    .dots span.active { background: var(--accent); }
+    .hint {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      z-index: 50;
+    }
+    @media print {
+      .nav, .hint { display: none; }
+      .slide {
+        display: flex !important;
+        page-break-after: always;
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        box-shadow: none;
+      }
+    }
+  </style>
+<style id="report-responsive">
+/* Shared by newly generated reports and reports already in the archive. */
+@media screen {
+  .deck { width: 100%; height: 100vh; height: 100dvh; }
+  .slide { overflow-y: auto; max-height: calc(100vh - 150px); max-height: calc(100dvh - 150px); }
+  .slide > * { flex-shrink: 0; }
+  .slide::before { top: 0; right: 0; width: 200px; height: 200px; }
+  .slide h1, .slide h2, .vod-title, .meta-line, .info-card, .clip-list { overflow-wrap: anywhere; }
+  .info-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .info-card { min-width: 0; }
+  .badge { align-self: flex-start; }
+  .nav { max-width: calc(100% - 24px); }
+  .nav button { flex: 0 0 44px; width: 44px; height: 44px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent2); outline-offset: 3px; }
+  .blog-nav a { display: inline-flex; align-items: center; min-height: 28px; }
+}
+@media screen and (max-width: 960px), screen and (max-height: 700px) {
+  html, body { height: auto; min-height: 100%; overflow: visible; }
+  body { padding: calc(72px + env(safe-area-inset-top, 0px)) 12px calc(104px + env(safe-area-inset-bottom, 0px)); }
+  .deck { display: block; width: 100%; height: auto; }
+  .slide {
+    width: 100%; height: auto; max-height: none;
+    min-height: calc(100vh - 176px); min-height: calc(100dvh - 176px);
+    padding: 28px; margin: 0 auto; overflow: visible;
+  }
+  .slide::before { display: none; }
+  .slide.active { animation: none; }
+  .slide-cover h1 { font-size: clamp(1.6rem, 5vw, 2.4rem); }
+  .slide-cover .sub { font-size: 1rem; }
+  .rank-row { gap: 16px; }
+  .rank-num { min-width: 52px; font-size: 3rem; }
+  .clip-list { max-height: none; overflow: visible; }
+  .summary-table { display: block; max-width: 100%; overflow-x: auto; flex: none; }
+  .summary-table th, .summary-table td { min-width: 76px; overflow-wrap: anywhere; }
+  .summary-table th:first-child, .summary-table td:first-child { min-width: 200px; }
+  .nav { bottom: calc(12px + env(safe-area-inset-bottom, 0px)); padding: 8px 16px; gap: 12px; }
+  .hint { display: none; }
+  .blog-nav { top: calc(12px + env(safe-area-inset-top, 0px)) !important; max-width: calc(100% - 24px); }
+}
+@media screen and (max-width: 640px) {
+  .slide { padding: 24px 18px; border-radius: 12px; }
+  .slide-info h2, .slide-highlight h2, .slide-summary h2 { margin-bottom: 18px; }
+  .info-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .info-card { padding: 14px; }
+  .formula { padding: 14px; font-size: 0.9rem; }
+  .rank-row { flex-direction: column; }
+  .rank-body { width: 100%; }
+  .time-range { font-size: 1.05rem; overflow-wrap: anywhere; }
+  .score-bar { gap: 8px; }
+  .score-chip { flex: 1 1 100px; padding: 10px; min-width: 0; }
+  .reason-grid { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .reason-title span { display: block; margin: 4px 0 0; }
+  .btn-link { display: block; width: 100%; min-height: 44px; text-align: center; padding: 12px; overflow-wrap: anywhere; }
+  .nav .dots { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .slide.active { animation: none; }
+  .btn-link { transition: none; }
+}
+
+</style>
+</head>
+<body><nav class="blog-nav" style="position:fixed;z-index:9999;top:12px;left:12px;padding:8px 14px;background:rgba(15,20,25,0.92);border-radius:8px;border:1px solid rgba(255,255,255,0.15);"><a href="../index.html" style="color:#00e676;text-decoration:none;font-weight:700;font-size:0.9rem;">← 리포트 목록</a></nav>
+  <p class="hint">← → 키 또는 버튼으로 슬라이드 이동</p>
+  <div class="deck" id="deck">
+    <section class="slide slide-cover active" data-slide="0">
+      <span class="badge">치지직 주간 하이라이트</span>
+      <h1>블레어 로즈</h1>
+      <p class="sub">주간 방송 하이라이트 자동 분석 리포트</p>
+      <p class="period">2026.09.18 – 2026.09.25</p>
+      <p class="sub unofficial" style="margin-top:16px">비공식 · 자동 분석 리포트이며 치지직·스트리머와 무관합니다.</p>
+      <p class="sub" style="margin-top:12px">작성: 2026-09-25 17:35</p>
+      <p class="sub unofficial" style="margin-top:16px">비공식 · 자동 분석 리포트이며 치지직·스트리머와 무관합니다.</p>
+    </section>
+
+    <section class="slide slide-info" data-slide="1">
+      <h2>분석 개요</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="label">조사 기간</div>
+          <div class="value">2026-09-18 12:02:21<br>~ 2026-09-25 02:41:31</div>
+        </div>
+        <div class="info-card">
+          <div class="label">분석 대상</div>
+          <div class="value">다시보기 6개<br>기간 내 클립 45개</div>
+        </div>
+        <div class="info-card">
+          <div class="label">주간 선정</div>
+          <div class="value">모든 다시보기에서<br>후보 53개 중 상위 8개</div>
+        </div>
+        <div class="info-card">
+          <div class="label">기간 기준</div>
+          <div class="value">2026-09-18 12:02 ~ 2026-09-25 02:41<br>시작: 7일 전(조회 기준일) 첫 방송 시작<br>종료: 1일 전 마지막 방송 종료</div>
+        </div>
+      </div>
+      <div class="formula">각 다시보기 안에서 평소보다 채팅량과 채팅 참여 인원이 얼마나 늘었는지, 같은 시점에 클립이 얼마나 만들어지고 조회됐는지를 함께 비교해 하이라이트 점수(0~100점)를 계산합니다. 이 점수는 절대적인 인기나 시청자 비율이 아니라 방송 안에서의 상대적인 반응 크기입니다. 반응이 오래 이어진 구간에서도 실제 편집하기 좋은 순간을 나눠 찾은 뒤, 모든 다시보기의 후보 중 상위 8개를 선정합니다.</div>
+    </section>
+
+    
+    <section class="slide slide-highlight" data-slide="2">
+      <span class="badge">주간 추천 1</span>
+      <div class="rank-row">
+        <div class="rank-num">#1</div>
+        <div class="rank-body">
+          <div class="vod-title">오늘은 지렷습니다</div>
+          <div class="meta-line">다시보기 번호 15363020 · 하이라이트 후보</div>
+          <div class="time-caption">추천 편집 구간</div>
+          <div class="time-range">02:35:00 – 02:38:00</div>
+          <div class="meta-line">반응이 이어진 전체 구간 · 02:35:40 – 02:38:40</div>
+          <div class="meta-line">가까운 반응 2개를 한 후보로 묶음 · 바로가기 위치 02:36:00</div>
+          <div class="score-bar">
+            <div class="score-chip">핵심 순간 채팅<strong>42건</strong></div>
+            <div class="score-chip">채팅 참여 인원<strong>33명</strong></div>
+            <div class="score-chip">연결된 클립<strong>1개</strong></div>
+            <div class="score-chip">하이라이트 점수<strong>83점</strong></div>
+          </div>
+          <div class="reason-box"><div class="reason-title">선정 이유 <span>전체 기준=다시보기 전체와 비교 · 주변 기준=앞뒤 시간대와 비교 · 실제 시청자 비율이 아님</span></div><div class="reason-grid"><div class="reason-item"><span>방송 전체 기준 채팅 반응</span><strong>93점</strong></div><div class="reason-item"><span>주변 시간 기준 채팅 반응</span><strong>62점</strong></div><div class="reason-item"><span>방송 전체 기준 참여 인원</span><strong>92점</strong></div><div class="reason-item"><span>주변 시간 기준 참여 인원</span><strong>53점</strong></div><div class="reason-item"><span>같은 순간에 만들어진 클립 수</span><strong>49점</strong></div><div class="reason-item"><span>연결된 클립의 조회 반응</span><strong>94점</strong></div><div class="reason-item"><span>채팅과 클립이 함께 반응</span><strong>71점</strong></div></div></div>
+          <ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/2SPRdA7G6I" target="_blank" rel="noopener">리루리빨간약</a> (조회 258)</li></ul>
+          <a class="btn-link" href="https://chzzk.naver.com/video/15363020?currentTime=9360" target="_blank" rel="noopener">이 순간부터 다시보기</a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="slide slide-highlight" data-slide="3">
+      <span class="badge">주간 추천 2</span>
+      <div class="rank-row">
+        <div class="rank-num">#2</div>
+        <div class="rank-body">
+          <div class="vod-title">후열 구불육 피아노</div>
+          <div class="meta-line">다시보기 번호 15314683 · 하이라이트 후보</div>
+          <div class="time-caption">추천 편집 구간</div>
+          <div class="time-range">00:49:00 – 00:52:00</div>
+          <div class="meta-line">반응이 이어진 전체 구간 · 00:49:40 – 00:53:00</div>
+          <div class="meta-line">가까운 반응 2개를 한 후보로 묶음 · 바로가기 위치 00:50:00</div>
+          <div class="score-bar">
+            <div class="score-chip">핵심 순간 채팅<strong>43건</strong></div>
+            <div class="score-chip">채팅 참여 인원<strong>35명</strong></div>
+            <div class="score-chip">연결된 클립<strong>1개</strong></div>
+            <div class="score-chip">하이라이트 점수<strong>75점</strong></div>
+          </div>
+          <div class="reason-box"><div class="reason-title">선정 이유 <span>전체 기준=다시보기 전체와 비교 · 주변 기준=앞뒤 시간대와 비교 · 실제 시청자 비율이 아님</span></div><div class="reason-grid"><div class="reason-item"><span>방송 전체 기준 채팅 반응</span><strong>92점</strong></div><div class="reason-item"><span>주변 시간 기준 채팅 반응</span><strong>30점</strong></div><div class="reason-item"><span>방송 전체 기준 참여 인원</span><strong>92점</strong></div><div class="reason-item"><span>주변 시간 기준 참여 인원</span><strong>25점</strong></div><div class="reason-item"><span>같은 순간에 만들어진 클립 수</span><strong>49점</strong></div><div class="reason-item"><span>연결된 클립의 조회 반응</span><strong>100점</strong></div><div class="reason-item"><span>채팅과 클립이 함께 반응</span><strong>67점</strong></div></div></div>
+          <ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/KLiY6V3mfW" target="_blank" rel="noopener">........</a> (조회 224)</li></ul>
+          <a class="btn-link" href="https://chzzk.naver.com/video/15314683?currentTime=3000" target="_blank" rel="noopener">이 순간부터 다시보기</a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="slide slide-highlight" data-slide="4">
+      <span class="badge">주간 추천 3</span>
+      <div class="rank-row">
+        <div class="rank-num">#3</div>
+        <div class="rank-body">
+          <div class="vod-title">트리가드 거지</div>
+          <div class="meta-line">다시보기 번호 15299971 · 하이라이트 후보</div>
+          <div class="time-caption">추천 편집 구간</div>
+          <div class="time-range">00:04:00 – 00:07:00</div>
+          <div class="meta-line">반응이 이어진 전체 구간 · 00:04:40 – 00:10:00 · 긴 반응 속에서 편집 순간을 따로 선정</div>
+          <div class="meta-line">가까운 반응 2개를 한 후보로 묶음 · 바로가기 위치 00:05:00</div>
+          <div class="score-bar">
+            <div class="score-chip">핵심 순간 채팅<strong>49건</strong></div>
+            <div class="score-chip">채팅 참여 인원<strong>41명</strong></div>
+            <div class="score-chip">연결된 클립<strong>2개</strong></div>
+            <div class="score-chip">하이라이트 점수<strong>73점</strong></div>
+          </div>
+          <div class="reason-box"><div class="reason-title">선정 이유 <span>전체 기준=다시보기 전체와 비교 · 주변 기준=앞뒤 시간대와 비교 · 실제 시청자 비율이 아님</span></div><div class="reason-grid"><div class="reason-item"><span>방송 전체 기준 채팅 반응</span><strong>93점</strong></div><div class="reason-item"><span>주변 시간 기준 채팅 반응</span><strong>26점</strong></div><div class="reason-item"><span>방송 전체 기준 참여 인원</span><strong>95점</strong></div><div class="reason-item"><span>주변 시간 기준 참여 인원</span><strong>21점</strong></div><div class="reason-item"><span>같은 순간에 만들어진 클립 수</span><strong>49점</strong></div><div class="reason-item"><span>연결된 클립의 조회 반응</span><strong>94점</strong></div><div class="reason-item"><span>채팅과 클립이 함께 반응</span><strong>67점</strong></div></div></div>
+          <p class="meta-line" style="margin-top:8px">클립 2개 · 조회수 합산 196</p><ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/MQiVLV69IQ" target="_blank" rel="noopener">카와이 다케자(1절)</a> (조회 174)</li><li><a href="https://chzzk.naver.com/clips/NYJqGqcOkR" target="_blank" rel="noopener">카와이 다케자(2절)</a> (조회 22)</li></ul>
+          <a class="btn-link" href="https://chzzk.naver.com/video/15299971?currentTime=300" target="_blank" rel="noopener">이 순간부터 다시보기</a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="slide slide-highlight" data-slide="5">
+      <span class="badge">주간 추천 4</span>
+      <div class="rank-row">
+        <div class="rank-num">#4</div>
+        <div class="rank-body">
+          <div class="vod-title">후열 구불육 피아노</div>
+          <div class="meta-line">다시보기 번호 15314683 · 하이라이트 후보</div>
+          <div class="time-caption">추천 편집 구간</div>
+          <div class="time-range">00:27:34 – 00:30:34</div>
+          <div class="meta-line">반응이 이어진 전체 구간 · 00:27:30 – 00:31:20</div>
+          <div class="meta-line">가까운 반응 3개를 한 후보로 묶음 · 바로가기 위치 00:28:34</div>
+          <div class="score-bar">
+            <div class="score-chip">핵심 순간 채팅<strong>51건</strong></div>
+            <div class="score-chip">채팅 참여 인원<strong>39명</strong></div>
+            <div class="score-chip">연결된 클립<strong>2개</strong></div>
+            <div class="score-chip">하이라이트 점수<strong>72점</strong></div>
+          </div>
+          <div class="reason-box"><div class="reason-title">선정 이유 <span>전체 기준=다시보기 전체와 비교 · 주변 기준=앞뒤 시간대와 비교 · 실제 시청자 비율이 아님</span></div><div class="reason-grid"><div class="reason-item"><span>방송 전체 기준 채팅 반응</span><strong>96점</strong></div><div class="reason-item"><span>주변 시간 기준 채팅 반응</span><strong>28점</strong></div><div class="reason-item"><span>방송 전체 기준 참여 인원</span><strong>96점</strong></div><div class="reason-item"><span>주변 시간 기준 참여 인원</span><strong>20점</strong></div><div class="reason-item"><span>같은 순간에 만들어진 클립 수</span><strong>49점</strong></div><div class="reason-item"><span>연결된 클립의 조회 반응</span><strong>76점</strong></div><div class="reason-item"><span>채팅과 클립이 함께 반응</span><strong>62점</strong></div></div></div>
+          <p class="meta-line" style="margin-top:8px">클립 2개 · 조회수 합산 183</p><ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/KAYAdFWATM" target="_blank" rel="noopener">법규도 못하시네 ㅋㅋㅋㅋㅋ</a> (조회 61)</li><li><a href="https://chzzk.naver.com/clips/8PjuVR6TrG" target="_blank" rel="noopener">머리로 뭘 싸요?</a> (조회 122)</li></ul>
+          <a class="btn-link" href="https://chzzk.naver.com/video/15314683?currentTime=1714" target="_blank" rel="noopener">이 순간부터 다시보기</a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="slide slide-highlight" data-slide="6">
+      <span class="badge">주간 추천 5</span>
+      <div class="rank-row">
+        <div class="rank-num">#5</div>
+        <div class="rank-body">
+          <div class="vod-title">오늘은 지렷습니다</div>
+          <div class="meta-line">다시보기 번호 15363020 · 하이라이트 후보</div>
+          <div class="time-caption">추천 편집 구간</div>
+          <div class="time-range">07:35:02 – 07:38:02</div>
+          <div class="meta-line">반응이 이어진 전체 구간 · 07:35:40 – 07:37:20</div>
+          <div class="meta-line">가까운 반응 2개를 한 후보로 묶음 · 바로가기 위치 07:36:02</div>
+          <div class="score-bar">
+            <div class="score-chip">핵심 순간 채팅<strong>44건</strong></div>
+            <div class="score-chip">채팅 참여 인원<strong>32명</strong></div>
+            <div class="score-chip">연결된 클립<strong>1개</strong></div>
+            <div class="score-chip">하이라이트 점수<strong>69점</strong></div>
+          </div>
+          <div class="reason-box"><div class="reason-title">선정 이유 <span>전체 기준=다시보기 전체와 비교 · 주변 기준=앞뒤 시간대와 비교 · 실제 시청자 비율이 아님</span></div><div class="reason-grid"><div class="reason-item"><span>방송 전체 기준 채팅 반응</span><strong>94점</strong></div><div class="reason-item"><span>주변 시간 기준 채팅 반응</span><strong>54점</strong></div><div class="reason-item"><span>방송 전체 기준 참여 인원</span><strong>91점</strong></div><div class="reason-item"><span>주변 시간 기준 참여 인원</span><strong>49점</strong></div><div class="reason-item"><span>같은 순간에 만들어진 클립 수</span><strong>49점</strong></div><div class="reason-item"><span>연결된 클립의 조회 반응</span><strong>23점</strong></div><div class="reason-item"><span>채팅과 클립이 함께 반응</span><strong>36점</strong></div></div></div>
+          <ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/41hdn2rYhL" target="_blank" rel="noopener">로 수 미</a> (조회 3)</li></ul>
+          <a class="btn-link" href="https://chzzk.naver.com/video/15363020?currentTime=27362" target="_blank" rel="noopener">이 순간부터 다시보기</a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="slide slide-highlight" data-slide="7">
+      <span class="badge">주간 추천 6</span>
+      <div class="rank-row">
+        <div class="rank-num">#6</div>
+        <div class="rank-body">
+          <div class="vod-title">안녕마리아너를처음본순간부터좋아했어방송전에고백하고싶었는데바보같이그땐용기가없더라지금은이수많은사람들앞에서오로지너만사랑한다고말하고싶어서큰마음먹고용기내어봐매일매일방송에서너볼때마다두근댔고</div>
+          <div class="meta-line">다시보기 번호 15339407 · 하이라이트 후보</div>
+          <div class="time-caption">추천 편집 구간</div>
+          <div class="time-range">00:06:16 – 00:09:16</div>
+          <div class="meta-line">반응이 이어진 전체 구간 · 00:06:40 – 00:08:30</div>
+          <div class="meta-line">가까운 반응 3개를 한 후보로 묶음 · 바로가기 위치 00:07:16</div>
+          <div class="score-bar">
+            <div class="score-chip">핵심 순간 채팅<strong>49건</strong></div>
+            <div class="score-chip">채팅 참여 인원<strong>40명</strong></div>
+            <div class="score-chip">연결된 클립<strong>2개</strong></div>
+            <div class="score-chip">하이라이트 점수<strong>68점</strong></div>
+          </div>
+          <div class="reason-box"><div class="reason-title">선정 이유 <span>전체 기준=다시보기 전체와 비교 · 주변 기준=앞뒤 시간대와 비교 · 실제 시청자 비율이 아님</span></div><div class="reason-grid"><div class="reason-item"><span>방송 전체 기준 채팅 반응</span><strong>81점</strong></div><div class="reason-item"><span>주변 시간 기준 채팅 반응</span><strong>26점</strong></div><div class="reason-item"><span>방송 전체 기준 참여 인원</span><strong>79점</strong></div><div class="reason-item"><span>주변 시간 기준 참여 인원</span><strong>21점</strong></div><div class="reason-item"><span>같은 순간에 만들어진 클립 수</span><strong>49점</strong></div><div class="reason-item"><span>연결된 클립의 조회 반응</span><strong>100점</strong></div><div class="reason-item"><span>채팅과 클립이 함께 반응</span><strong>59점</strong></div></div></div>
+          <p class="meta-line" style="margin-top:8px">클립 2개 · 조회수 합산 408</p><ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/Wjh5xttBb4" target="_blank" rel="noopener">관통상</a> (조회 164)</li><li><a href="https://chzzk.naver.com/clips/17emSIIaaH" target="_blank" rel="noopener">어어어?</a> (조회 244)</li></ul>
+          <a class="btn-link" href="https://chzzk.naver.com/video/15339407?currentTime=436" target="_blank" rel="noopener">이 순간부터 다시보기</a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="slide slide-highlight" data-slide="8">
+      <span class="badge">주간 추천 7</span>
+      <div class="rank-row">
+        <div class="rank-num">#7</div>
+        <div class="rank-body">
+          <div class="vod-title">트리가드 거지</div>
+          <div class="meta-line">다시보기 번호 15299971 · 하이라이트 후보</div>
+          <div class="time-caption">추천 편집 구간</div>
+          <div class="time-range">01:38:37 – 01:41:37</div>
+          <div class="meta-line">반응이 이어진 전체 구간 · 01:39:10 – 01:42:00</div>
+          <div class="meta-line">가까운 반응 3개를 한 후보로 묶음 · 바로가기 위치 01:39:37</div>
+          <div class="score-bar">
+            <div class="score-chip">핵심 순간 채팅<strong>35건</strong></div>
+            <div class="score-chip">채팅 참여 인원<strong>31명</strong></div>
+            <div class="score-chip">연결된 클립<strong>2개</strong></div>
+            <div class="score-chip">하이라이트 점수<strong>66점</strong></div>
+          </div>
+          <div class="reason-box"><div class="reason-title">선정 이유 <span>전체 기준=다시보기 전체와 비교 · 주변 기준=앞뒤 시간대와 비교 · 실제 시청자 비율이 아님</span></div><div class="reason-grid"><div class="reason-item"><span>방송 전체 기준 채팅 반응</span><strong>80점</strong></div><div class="reason-item"><span>주변 시간 기준 채팅 반응</span><strong>37점</strong></div><div class="reason-item"><span>방송 전체 기준 참여 인원</span><strong>83점</strong></div><div class="reason-item"><span>주변 시간 기준 참여 인원</span><strong>35점</strong></div><div class="reason-item"><span>같은 순간에 만들어진 클립 수</span><strong>49점</strong></div><div class="reason-item"><span>연결된 클립의 조회 반응</span><strong>62점</strong></div><div class="reason-item"><span>채팅과 클립이 함께 반응</span><strong>55점</strong></div></div></div>
+          <p class="meta-line" style="margin-top:8px">클립 2개 · 조회수 합산 270</p><ul class="clip-list"><li><a href="https://chzzk.naver.com/clips/tMAB5mJn9A" target="_blank" rel="noopener">&#x27;근&#x27;력</a> (조회 29)</li><li><a href="https://chzzk.naver.com/clips/AGtHuXtFbz" target="_blank" rel="noopener">도황 부럽다</a> (조회 241)</li></ul>
+          <a class="btn-link" href="https://chzzk.naver.com/video/15299971?currentTime=5977" target="_blank" rel="noopener">이 순간부터 다시보기</a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="slide slide-highlight" data-slide="9">
+      <span class="badge">주간 추천 8</span>
+      <div class="rank-row">
+        <div class="rank-num">#8</div>
+        <div class="rank-body">
+          <div class="vod-title">후열 구불육 피아노</div>
+          <div class="meta-line">다시보기 번호 15314683 · 하이라이트 후보</div>
+          <div class="time-caption">추천 편집 구간</div>
+          <div class="time-range">02:17:15 – 02:20:15</div>
+          <div class="meta-line">반응이 이어진 전체 구간 · 02:17:50 – 02:18:50</div>
+          
+          <div class="score-bar">
+            <div class="score-chip">핵심 순간 채팅<strong>67건</strong></div>
+            <div class="score-chip">채팅 참여 인원<strong>46명</strong></div>
+            <div class="score-chip">연결된 클립<strong>0개</strong></div>
+            <div class="score-chip">하이라이트 점수<strong>64점</strong></div>
+          </div>
+          <div class="reason-box"><div class="reason-title">선정 이유 <span>전체 기준=다시보기 전체와 비교 · 주변 기준=앞뒤 시간대와 비교 · 실제 시청자 비율이 아님</span></div><div class="reason-grid"><div class="reason-item"><span>방송 전체 기준 채팅 반응</span><strong>99점</strong></div><div class="reason-item"><span>주변 시간 기준 채팅 반응</span><strong>76점</strong></div><div class="reason-item"><span>방송 전체 기준 참여 인원</span><strong>98점</strong></div><div class="reason-item"><span>주변 시간 기준 참여 인원</span><strong>70점</strong></div><div class="reason-item"><span>같은 순간에 만들어진 클립 수</span><strong>0점</strong></div><div class="reason-item"><span>연결된 클립의 조회 반응</span><strong>0점</strong></div><div class="reason-item"><span>채팅과 클립이 함께 반응</span><strong>0점</strong></div></div></div>
+          
+          <a class="btn-link" href="https://chzzk.naver.com/video/15314683?currentTime=8295" target="_blank" rel="noopener">이 순간부터 다시보기</a>
+        </div>
+      </div>
+    </section>
+    
+
+    <section class="slide slide-summary" data-slide="10">
+      <h2>분석한 다시보기 요약</h2>
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>제목</th>
+            <th>다시보기 번호</th>
+            <th>클립</th>
+            <th>찾은 후보</th>
+            <th>링크</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>어이, 아침 1군들...날 감당할수있겠나?</td><td>15253270</td><td>0</td><td>4</td><td><a href="https://chzzk.naver.com/video/15253270" target="_blank" rel="noopener">열기</a></td></tr>
+<tr><td>모캡하고 돌아온 아갓쉬가 와쑤 ~</td><td>15289588</td><td>5</td><td>6</td><td><a href="https://chzzk.naver.com/video/15289588" target="_blank" rel="noopener">열기</a></td></tr>
+<tr><td>트리가드 거지</td><td>15299971</td><td>15</td><td>11</td><td><a href="https://chzzk.naver.com/video/15299971" target="_blank" rel="noopener">열기</a></td></tr>
+<tr><td>후열 구불육 피아노</td><td>15314683</td><td>6</td><td>16</td><td><a href="https://chzzk.naver.com/video/15314683" target="_blank" rel="noopener">열기</a></td></tr>
+<tr><td>안녕마리아너를처음본순간부터좋아했어방송전에고백하고싶었는데바보같이그땐용기가없더라지금은이수많은사람들앞에서오로지너만사랑한다고말하고싶어서큰마음먹고용기내어봐매일매일방송에서너볼때마다두근댔고</td><td>15339407</td><td>6</td><td>6</td><td><a href="https://chzzk.naver.com/video/15339407" target="_blank" rel="noopener">열기</a></td></tr>
+<tr><td>오늘은 지렷습니다</td><td>15363020</td><td>13</td><td>10</td><td><a href="https://chzzk.naver.com/video/15363020" target="_blank" rel="noopener">열기</a></td></tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <nav class="nav" aria-label="슬라이드 탐색">
+    <button type="button" id="prev" title="이전">‹</button>
+    <span class="counter" id="counter">1 / 1</span>
+    <div class="dots" id="dots"></div>
+    <button type="button" id="next" title="다음">›</button>
+  </nav>
+
+  <script>
+    (function () {
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const total = slides.length;
+      let idx = 0;
+      const counter = document.getElementById("counter");
+      const dotsEl = document.getElementById("dots");
+
+      slides.forEach((_, i) => {
+        const d = document.createElement("span");
+        d.title = "슬라이드 " + (i + 1);
+        d.addEventListener("click", () => go(i));
+        dotsEl.appendChild(d);
+      });
+
+      function render() {
+        slides.forEach((s, i) => s.classList.toggle("active", i === idx));
+        counter.textContent = (idx + 1) + " / " + total;
+        dotsEl.querySelectorAll("span").forEach((d, i) => d.classList.toggle("active", i === idx));
+      }
+
+      function go(n) {
+        idx = Math.max(0, Math.min(total - 1, n));
+        render();
+      }
+
+      document.getElementById("prev").addEventListener("click", () => go(idx - 1));
+      document.getElementById("next").addEventListener("click", () => go(idx + 1));
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); go(idx + 1); }
+        if (e.key === "ArrowLeft") { e.preventDefault(); go(idx - 1); }
+        if (e.key === "Home") { go(0); }
+        if (e.key === "End") { go(total - 1); }
+      });
+      render();
+    })();
+  </script>
+<script id="report-responsive-navigation">
+(function () {
+  const deck = document.querySelector('.deck');
+  if (!deck) return;
+  let current = deck.querySelector('.slide.active');
+  new MutationObserver(function () {
+    const active = deck.querySelector('.slide.active');
+    if (active === current) return;
+    current = active;
+    if (active) active.scrollTop = 0;
+    window.scrollTo(0, 0);
+  }).observe(deck, { subtree: true, attributes: true, attributeFilter: ['class'] });
+})();
+
+</script>
+</body>
+</html>
